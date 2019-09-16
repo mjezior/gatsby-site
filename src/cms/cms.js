@@ -1,28 +1,16 @@
-/**
- * The default export of `netlify-cms-app` is an object with all of the Netlify CMS
- * extension registration methods, such as `registerWidget` and
- * `registerPreviewTemplate`.
- */
-import CMS from "netlify-cms-app"
+import CMS from 'netlify-cms-app'
+import uploadcare from 'netlify-cms-media-library-uploadcare'
+import cloudinary from 'netlify-cms-media-library-cloudinary'
 
-/**
- * Any imported styles will automatically be applied to the editor preview
- * pane, there is no need to use `registerPreviewStyle` for imported styles.
- * All of the example imports below would result in styles being applied to the
- * preview pane.
- */
-import "module-that-imports-styles.js"
-import "styles.scss"
-import "../other-styles.css"
+import AboutPagePreview from './preview-templates/AboutPagePreview'
+import BlogPostPreview from './preview-templates/BlogPostPreview'
+import ProductPagePreview from './preview-templates/ProductPagePreview'
+import IndexPagePreview from './preview-templates/IndexPagePreview'
 
-/**
- * Let's say you've created widget and preview components for a custom image
- * gallery widget in separate files:
- */
-import ImageGalleryWidget from "./image-gallery-widget.js"
-import ImageGalleryPreview from "./image-gallery-preview.js"
+CMS.registerMediaLibrary(uploadcare);
+CMS.registerMediaLibrary(cloudinary);
 
-/**
- * Register the imported widget:
- */
-CMS.registerWidget(`image-gallery`, ImageGalleryWidget, ImageGalleryPreview)
+CMS.registerPreviewTemplate('index', IndexPagePreview)
+CMS.registerPreviewTemplate('about', AboutPagePreview)
+CMS.registerPreviewTemplate('products', ProductPagePreview)
+CMS.registerPreviewTemplate('blog', BlogPostPreview)
